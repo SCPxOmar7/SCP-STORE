@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SCP STORE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet" />
+    <style>
+        /* جذور المتغيرات اللونية */
+        :root {
+            --blood-red: #8a0303;
+            --neon-green: #0fff50;
+            --dark-bg: #0a0a0a;
+            --glow: 0 0 10px var(--neon-green);
+        }
+
+        /* إعدادات عامة للصفحة */
+        body {
+            margin: 0;
+            background-color: var(--dark-bg);
+            color: var(--neon-green);
+            font-family: 'Cairo', sans-serif;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        /* اسم المتجر - صورة وشعار */
+        .name-image {
+            max-width: 80%;
+            margin: 20px auto;
+            filter: drop-shadow(var(--glow));
+            animation: pulse 3s infinite alternate;
+            display: block;
+        }
+
+        .logo {
+            max-width: 200px;
+            margin: 20px auto;
+            filter: drop-shadow(var(--glow));
+            display: block;
+        }
+
+        /* تأثير النبض للنص */
+        @keyframes pulse {
+            0% {
+                filter: drop-shadow(0 0 5px var(--neon-green));
+            }
+            100% {
+                filter: drop-shadow(0 0 20px var(--neon-green));
+            }
+        }
+
+        /* تأثير الدم المتساقط */
+        .blood-drips {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.7;
+        }
+
+        /* تحذير المستخدم بلهجة مرعبة */
+        .warning-box {
+            background-color: var(--blood-red);
+            color: white;
+            margin: 20px auto;
+            padding: 15px;
+            max-width: 600px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 10px var(--blood-red);
+        }
+
+        .warning-box::before {
+            content: "⚠️ تحذير هام ⚠️";
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            height: 100%;
+            background: rgba(255, 0, 0, 0.1);
+            animation: slide 5s linear infinite;
+            color: white;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bolder;
+            text-shadow: 0 0 5px red;
+            pointer-events: none;
+        }
+
+        @keyframes slide {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        /* روابط الدعم */
+        .support {
+            margin-top: 20px;
+            font-size: 1.1rem;
+        }
+
+        .support a {
+            color: var(--neon-green);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .support a:hover {
+            text-decoration: underline;
+        }
+
+        /* طرق الدفع */
+        .payment-methods {
+            margin: 25px auto;
+            font-size: 1.1rem;
+            max-width: 600px;
+            color: white;
+        }
+
+        /* زر رفع ملف (لو حابب تضيفه) */
+        .file-upload {
+            margin: 20px auto;
+            max-width: 300px;
+        }
+
+        .file-upload-input {
+            display: none;
+        }
+
+        .file-upload-label {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--neon-green);
+            color: var(--dark-bg);
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--neon-green);
+            transition: background-color 0.3s ease;
+        }
+
+        .file-upload-label:hover {
+            background-color: #0cca40;
+        }
+
+        /* تنسيق روابط الصور البديلة */
+        .files-gallery {
+            margin: 30px auto;
+            max-width: 900px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            z-index: 1;
+            position: relative;
+        }
+
+        .files-gallery a img {
+            max-width: 220px;
+            border: 2px solid var(--neon-green);
+            border-radius: 8px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .files-gallery a img:hover {
+            transform: scale(1.1);
+            border-color: var(--blood-red);
+        }
+    </style>
+</head>
+<body>
+    <!-- شعار المتجر -->
+    <img src="logo.png" alt="شعار SCP STORE" class="logo" />
+
+    <!-- اسم المتجر -->
+    <img src="scp-store-name.png" alt="SCP STORE" class="name-image" />
+
+    <!-- تحذير للمستخدم -->
+    <div class="warning-box">
+        يا مستخدم، احذر! لا يوجد استرجاع بعد الشراء أبداً.
+    </div>
+
+    <!-- روابط الدعم -->
+    <div class="support">
+        تواصل معنا عبر تيليجرام: 
+        <a href="https://t.me/scpstoreuc" target="_blank" rel="noopener noreferrer">t.me/scpstoreuc</a>  
+        - الدعم الفني: 
+        <a href="https://t.me/SCPxOmar7" target="_blank" rel="noopener noreferrer">@SCPxOmar7</a>
+    </div>
+
+    <!-- طرق الدفع -->
+    <div class="payment-methods">
+        الدفع متاح عبر أي محفظة إلكترونية.
+    </div>
+
+    <!-- معرض الملفات (الصور مع الروابط الجديدة) -->
+    <div class="files-gallery">
+        <a href="https://ibb.co/8n1gFmKT" target="_blank" rel="noopener noreferrer">
+            <img src="https://i.ibb.co/RGRTLgvZ/file-000000000cf861fd93b5a6c03c80a606.png" alt="ملف 1" />
+        </a>
+        <a href="https://ibb.co/xKzxzXmW" target="_blank" rel="noopener noreferrer">
+            <img src="https://i.ibb.co/7xrsrjgP/Background-Eraser-20250527-104845857.png" alt="ملف 2" />
+        </a>
+        <a href="https://ibb.co/qMcgBZsC" target="_blank" rel="noopener noreferrer">
+            <img src="https://i.ibb.co/XZK5XwsD/file-0000000014fc6230abdd6164376e6220.png" alt="ملف 3" />
+        </a>
+        <a href="https://ibb.co/0yLHQsH5" target="_blank" rel="noopener noreferrer">
+            <img src="https://i.ibb.co/4RLhJ1hk/IMG-20250526-155815.png" alt="ملف 4" />
+        </a>
+    </div>
+
+    <!-- تأثير الدم المتساقط (مثال بسيط) -->
+    <canvas class="blood-drips" id="bloodCanvas"></canvas>
+
+    <!-- مثال لزر رفع ملف (اختياري) -->
+    <div class="file-upload">
+        <input type="file" id="upload" class="file-upload-input" />
+        <label for="upload" class="file-upload-label">اختر ملف</label>
+    </div>
+
+    <script>
+        // مثال بسيط لرسم قطرات دم على الكانفاس (يمكن تطويره حسب الحاجة)
+        const canvas = document.getElementById('bloodCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+
+        function resize() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+
+        // نقطة دم
+        class BloodDrop {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = -20;
+                this.radius = Math.random() * 3 + 2;
+                this.speed = Math.random() * 2 + 1;
+                this.color = 'rgba(138, 3, 3, 0.8)';
+            }
+            update() {
+                this.y += this.speed;
+                if (this.y > height) {
+                    this.y = -20;
+                    this.x = Math.random() * width;
+                }
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.fillStyle = this.color;
+                ctx.shadowColor = 'red';
+                ctx.shadowBlur = 10;
+                ctx.ellipse(this.x, this.y, this.radius, this.radius * 1.5, 0, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        const drops = [];
+        for (let i = 0; i < 40; i++) {
+            drops.push(new BloodDrop());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            drops.forEach(drop => {
+                drop.update();
+                drop.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
