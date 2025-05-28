@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="public, max-age=31536000">
+    <title>SCP STORE - متجر شحن UC المرعب</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+        
+        :root {
+            --blood-red: #8a0303;
+            --neon-green: #0fff50;
+            --dark-bg: #0a0a0a;
+            --glow: 0 0 10px;
+        }
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--dark-bg);
+            color: white;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://i.ibb.co/RGRTLgvZ/file-000000000cf861fd93b5a6c03c80a606.png');
+            background-size: cover;
+            background-attachment: fixed;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        .blood-drips {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.9;
+        }
+        
+        .blood-drip {
+            position: absolute;
+            width: 3px;
+            background: var(--blood-red);
+            animation: drip 8s infinite;
+            filter: drop-shadow(0 0 5px var(--blood-red));
+        }
+        
+        .nuclear-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0,255,0,0.1) 0%, transparent 70%);
+            animation: nuclearPulse 15s infinite;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.7;
+        }
+        
+        @keyframes drip {
+            0% { height: 0; top: -100px; opacity: 0; }
+            20% { opacity: 1; }
+            100% { height: 100vh; opacity: 0; }
+        }
+        
+        @keyframes nuclearPulse {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(0.8); opacity: 0; }
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            min-height: 100vh;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--blood-red);
+            border-image: linear-gradient(to right, transparent, var(--blood-red), transparent) 1;
+        }
+        
+        .name-image {
+            max-width: 80%;
+            margin: 0 auto 20px;
+            filter: drop-shadow(var(--glow) var(--neon-green));
+            animation: pulse 3s infinite alternate;
+        }
+        
+        .logo {
+            max-width: 200px;
+            margin: 0 auto;
+            display: block;
+            filter: drop-shadow(var(--glow) var(--neon-green));
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.03); }
+        }
+        
+        .payment-info {
+            background-color: rgba(10, 0, 0, 0.8);
+            border: 2px solid var(--neon-green);
+            border-radius: 5px;
+            padding: 20px;
+            margin: 30px auto;
+            max-width: 800px;
+            box-shadow: 0 0 25px rgba(15, 255, 80, 0.4);
+        }
+        
+        .payment-info h2 {
+            color: var(--neon-green);
+            text-align: center;
+            margin-top: 0;
+            font-size: 1.8rem;
+        }
+        
+        .payment-methods {
+            margin: 20px 0;
+        }
+        
+        .payment-methods li {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .steps {
+            margin: 25px 0;
+            padding-left: 20px;
+        }
+        
+        .steps li {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .warning-box {
+            background-color: rgba(10, 0, 0, 0.8);
+            border: 2px solid var(--blood-red);
+            border-radius: 5px;
+            padding: 20px;
+            margin: 30px auto;
+            max-width: 800px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(139, 0, 0, 0.6);
+        }
+        
+        .warning-box::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 48%, rgba(255, 0, 0, 0.1) 50%, transparent 52%);
+            background-size: 10px 10px;
+            animation: warningStripe 1s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes warningStripe {
+            0% { background-position: 0 0; }
+            100% { background-position: 10px 0; }
+        }
+        
+        .warning-title {
+            color: var(--blood-red);
+            text-shadow: 0 0 8px var(--blood-red);
+            font-size: 1.8rem;
+            margin-top: 0;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .warning-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 0;
+            text-align: center;
+        }
+        
+        .channel-box {
+            background-color: rgba(0, 10, 0, 0.8);
+            border: 2px solid var(--neon-green);
+            border-radius: 5px;
+            padding: 20px;
+            margin: 30px auto;
+            max-width: 800px;
+            text-align: center;
+        }
+        
+        .channel-box a {
+            color: var(--neon-green);
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+        
+        .channel-box a:hover {
+            text-shadow: 0 0 8px var(--neon-green);
+        }
+        
+        .prices-image {
+            max-width: 100%;
+            margin: 30px auto;
+            display: block;
+            border: 2px solid var(--neon-green);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(15, 255, 80, 0.3);
+        }
+        
+        .order-form {
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid var(--neon-green);
+            border-radius: 10px;
+            padding: 30px;
+            margin: 40px auto;
+            max-width: 600px;
+            box-shadow: 0 0 30px rgba(15, 255, 80, 0.3);
+            position: relative;
+        }
+        
+        .status-message {
+            display: none;
+            text-align: center;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        
+        .status-pending {
+            background-color: rgba(255, 165, 0, 0.2);
+            border: 1px solid orange;
+            color: orange;
+        }
+        
+        .status-success {
+            background-color: rgba(0, 255, 0, 0.2);
+            border: 1px solid lime;
+            color: lime;
+        }
+        
+        .status-error {
+            background-color: rgba(255, 0, 0, 0.2);
+            border: 1px solid red;
+            color: red;
+        }
+        
+        .status-rejected {
+            background-color: rgba(139, 0, 0, 0.3);
+            border: 1px solid var(--blood-red);
+            color: #ff6b6b;
+            text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+        }
+        
+        .status-timeout {
+            background-color: rgba(255, 165, 0, 0.3);
+            border: 1px solid orange;
+            color: orange;
+        }
+        
+        .order-number {
+            color: var(--neon-green);
+            font-weight: bold;
+            text-align: center;
+            margin: 15px 0;
+            font-size: 1.2rem;
+            display: none;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--neon-green);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 14px;
+            background-color: rgba(20, 20, 20, 0.8);
+            border: 1px solid var(--blood-red);
+            border-radius: 5px;
+            color: white;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--neon-green);
+            box-shadow: 0 0 15px rgba(15, 255, 80, 0.5);
+            background-color: rgba(30, 30, 30, 0.8);
+        }
+        
+        .file-upload {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .file-upload-btn {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--blood-red);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .file-upload-btn:hover {
+            background-color: #6a0000;
+        }
+        
+        .file-upload-btn::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.5s;
+        }
+        
+        .file-upload-btn:hover::after {
+            left: 100%;
+        }
+        
+        .file-upload-input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(to right, var(--blood-red), #6a0000);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 25px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(139, 0, 0, 0.5);
+        }
+        
+        .submit-btn:hover {
+            background: linear-gradient(to right, #6a0000, var(--blood-red));
+            box-shadow: 0 0 25px rgba(139, 0, 0, 0.7);
+        }
+        
+        .submit-btn:disabled {
+            background: grey;
+            cursor: not-allowed;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px 0;
+            color: #555;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(139, 0, 0, 0.3);
+        }
+        
+        .support-link {
+            color: var(--neon-green);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: inline-block;
+            margin: 0 10px;
+        }
+        
+        .support-link:hover {
+            text-shadow: 0 0 8px var(--neon-green);
+        }
+        
+        .telegram-username {
+            color: var(--neon-green);
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .container { padding: 15px; }
+            .name-image { max-width: 95%; }
+            .logo { max-width: 150px; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=fetch,FormData"></script>
+</head>
+<body>
+    <div class="blood-drips" id="bloodDrips"></div>
+    <div class="nuclear-effect"></div>
+    
+    <div class="container">
+        <div class="header">
+            <img src="https://i.ibb.co/7xrsrjgP/Background-Eraser-20250527-104845857.png" alt="SCP STORE" class="name-image">
+            <img src="https://i.ibb.co/XZK5XwsD/file-0000000014fc6230abdd6164376e6220.png" alt="SCP STORE Logo" class="logo">
+        </div>
+        
+        <div class="payment-info">
+            <h2>☢️ ᏚᏟᏢ ᏚᎢᎾᎡᎬ ☢️</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 20px;">الشحن من قلب الجحيم</p>
+            <p style="text-align: center; margin-bottom: 20px;">
+                🚀 شدات PUBG بسرعة خرافية، أمان جحيمي، وأسعار رسميّة من عالم مرعب!
+            </p>
+            <div class="payment-methods">
+                <h3 style="color: var(--neon-green); text-align: center;">💳 طرق الدفع:</h3>
+                <ul style="list-style-type: none; padding: 0;">
+                    <li>☣️ فودافون كاش</li>
+                    <li>☠️ اتصالات كاش</li>
+                    <li>⚰️ أورنج كود</li>
+                    <li>☢️ WE Pay</li>
+                </ul>
+                <p style="text-align: center; margin-top: 15px;">
+                    (على الرقم: 01154939016 ☎️)
+                </p>
+            </div>
+            <div class="steps">
+                <h3 style="color: var(--neon-green); text-align: center;">⚙️ خطوات الشحن:</h3>
+                <ol>
+                    <li>أدخل اسمك في اللعبة + الـ ID في النموذج أدناه.</li>
+                    <li>اختر باقتك من باقات اللعنة.</li>
+                    <li>حوّل الفلوس وابعت سكرين شوت (الدفع).</li>
+                    <li>انتظر تأكيد الطلب على الموقع خلال دقائق.</li>
+                </ol>
+                <p style="text-align: center; color: var(--neon-green); margin-top: 15px;">
+                    ⚡ شحن فوري - سهل وسريع!
+                </p>
+            </div>
+        </div>
+        
+        <div class="channel-box">
+            <h3 style="color: var(--neon-green); margin-top: 0;">❗ يجب الاشتراك في قناتنا أولاً</h3>
+            <p>لضمان استلام التحديثات والعروض الخاصة</p>
+            <a href="https://t.me/scpstoreuc" target="_blank">👉 انقر هنا للاشتراك في قناة SCP STORE 👈</a>
+        </div>
+        
+        <div class="warning-box">
+            <h2 class="warning-title">⚠️ تحذير</h2>
+            <p class="warning-text">
+                تأكد من صحة بياناتك قبل إرسال الطلب.<br>
+                ستظهر حالة طلبك (مقبول أو مرفوض) على الموقع خلال دقائق.<br>
+                للاستفسار: <a href="https://t.me/SCPxOmar7" style="color: var(--neon-green); text-decoration: underline;">@SCPxOmar7</a>
+            </p>
+        </div>
+        
+        <img src="https://i.ibb.co/4RLhJ1hk/IMG-20250526-155815.png" alt="أسعار الباقات" class="prices-image">
+        
+        <div class="order-form">
+            <h2 style="text-align: center; color: var(--neon-green); margin-top: 0;">طلب شحن UC</h2>
+            <div id="statusMessage" class="status-message"></div>
+            <div id="orderNumber" class="order-number"></div>
+            <form id="orderForm">
+                <div class="form-group">
+                    <label for="playerName">اسم اللاعب في PUBG:</label>
+                    <input type="text" id="playerName" name="playerName" required placeholder="أدخل اسم اللاعب في اللعبة">
+                </div>
+                <div class="form-group">
+                    <label for="playerId">آيدي اللاعب:</label>
+                    <input type="text" id="playerId" name="playerId" required placeholder="أدخل الآيدي الخاص بك">
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">رقم الهاتف المحول منه:</label>
+                    <input type="text" id="phoneNumber" name="phoneNumber" required placeholder="أدخل رقم الهاتف المحول منه" pattern="\d{11}" title="رقم الهاتف يجب أن يكون 11 رقمًا">
+                </div>
+                <div class="form-group">
+                    <label for="package">اختر الباقة:</label>
+                    <select id="package" name="package" required>
+                        <option value="">-- اختر باقة الشحن --</option>
+                        <option value="60">60 UC - جنيه 50</option>
+                        <option value="325">325 UC - جنيه 240</option>
+                        <option value="660">660 UC - جنيه 480</option>
+                        <option value="1800">1800 UC - جنيه 1180</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="paymentProof">صورة إثبات التحويل:</label>
+                    <div class="file-upload">
+                        <button type="button" class="file-upload-btn">اختر ملف</button>
+                        <input type="file" id="paymentProof" name="paymentProof" class="file-upload-input" accept="image/jpeg,image/png,image/gif" required>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">إرسال الطلب</button>
+            </form>
+        </div>
+        
+        <div class="footer">
+            <p>© 2025 SCP STORE - جميع الحقوق محفوظة</p>
+            <p class="telegram-username">📩 تيليجرام الدعم الفني: @SCPxOmar7</p>
+            <p class="telegram-username">متجر الظلام: @scpstoreuc</p>
+        </div>
+    </div>
+    
+    <script>
+        // إنشاء تأثيرات الدم المتساقطة
+        function createBloodDrips() {
+            const container = document.getElementById('bloodDrips');
+            const dripCount = 20;
+            for (let i = 0; i < dripCount; i++) {
+                const drip = document.createElement('div');
+                drip.classList.add('blood-drip');
+                const left = Math.random() * 100;
+                const delay = Math.random() * 15;
+                const duration = 5 + Math.random() * 10;
+                const width = 1 + Math.random() * 4;
+                drip.style.left = `${left}%`;
+                drip.style.animationDelay = `${delay}s`;
+                drip.style.animationDuration = `${duration}s`;
+                drip.style.width = `${width}px`;
+                container.appendChild(drip);
+            }
+        }
+        
+        // متغيرات النظام
+        const BOT_TOKEN = "8038860871:AAFXUleGK-jbK93JXFTJDhGYOCZUL0WgOys";
+        const ADMIN_CHAT_ID = "6061554033";
+        let currentOrderId = null;
+        let isCheckingUpdates = false;
+        let lastUpdateId = 0;
+        let currentOrderData = null;
+        let retryCount = 0;
+        const maxRetries = 5;
+
+        // دالة للتحقق من صحة التوكن
+        async function verifyBotToken() {
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getMe`);
+                const data = await response.json();
+                if (data.ok) {
+                    console.log(`Bot verified: @${data.result.username}`);
+                    return true;
+                } else {
+                    console.error(`Token verification failed: ${data.description}`);
+                    return false;
+                }
+            } catch (error) {
+                console.error('Error verifying token:', error);
+                return false;
+            }
+        }
+
+        // دالة لإرسال الرسائل إلى المسؤول
+        async function sendTelegramMessage(chatId, text, options = {}) {
+            try {
+                const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ chat_id: chatId, text: text, parse_mode: 'Markdown', ...options })
+                });
+                const result = await response.json();
+                if (!result.ok) throw new Error(result.description || 'Failed to send message');
+                console.log(`Message sent to ${chatId}: ${text}`);
+                return result;
+            } catch (error) {
+                console.error('Error sending message:', error);
+                throw error;
+            }
+        }
+
+        // دالة لإرسال صورة
+        async function sendTelegramPhoto(chatId, photo, caption) {
+            try {
+                const formData = new FormData();
+                formData.append('chat_id', chatId);
+                formData.append('photo', photo);
+                formData.append('caption', caption);
+                const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                if (!result.ok) throw new Error(result.description || 'Failed to send photo');
+                console.log('Photo sent successfully');
+                return result;
+            } catch (error) {
+                console.error('Error sending photo:', error);
+                throw error;
+            }
+        }
+
+        // دالة لجلب آخر update_id
+        async function getLatestUpdateId() {
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getUpdates`);
+                const data = await response.json();
+                if (data.ok && data.result.length > 0) {
+                    lastUpdateId = data.result[data.result.length - 1].update_id;
+                    console.log(`Latest update ID: ${lastUpdateId}`);
+                }
+            } catch (error) {
+                console.error('Error fetching initial updates:', error);
+            }
+        }
+
+        // دالة لتتبع التحديثات مع retry
+        async function checkForUpdates() {
+            if (!isCheckingUpdates || retryCount >= maxRetries) return;
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getUpdates?offset=${lastUpdateId + 1}&timeout=30`);
+                const data = await response.json();
+                retryCount = 0;
+                if (data.ok) {
+                    if (data.result.length > 0) {
+                        lastUpdateId = data.result[data.result.length - 1].update_id;
+                        console.log(`Received ${data.result.length} updates, lastUpdateId: ${lastUpdateId}`);
+                        for (const update of data.result) {
+                            if (update.message && update.message.text) {
+                                const text = update.message.text;
+                                console.log(`Processing update: ${text}`);
+                                if (text.startsWith('/accept_')) {
+                                    const orderId = text.split('_')[1];
+                                    await handleOrderResponse(orderId, 'accepted', update.message.chat.id);
+                                } else if (text.startsWith('/reject_')) {
+                                    const orderId = text.split('_')[1];
+                                    await handleOrderResponse(orderId, 'rejected', update.message.chat.id);
+                                }
+                            }
+                        }
+                    }
+                    if (isCheckingUpdates) setTimeout(checkForUpdates, 1000);
+                } else {
+                    console.error(`Telegram API error: ${data.description}`);
+                    if (data.error_code === 401) {
+                        isCheckingUpdates = false;
+                        const statusMessage = document.getElementById('statusMessage');
+                        if (statusMessage) {
+                            statusMessage.className = 'status-message status-error';
+                            statusMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> مشكلة في إعدادات الموقع (توكن غير صالح)، تواصل مع @SCPxOmar7';
+                            statusMessage.style.display = 'block';
+                        }
+                    } else {
+                        retryCount++;
+                        setTimeout(checkForUpdates, 1000 * Math.pow(2, retryCount));
+                    }
+                }
+            } catch (error) {
+                console.error('Error checking updates:', error);
+                retryCount++;
+                setTimeout(checkForUpdates, 1000 * Math.pow(2, retryCount));
+            }
+        }
+
+        // بدء التتبع
+        function startPollingUpdates() {
+            isCheckingUpdates = true;
+            retryCount = 0;
+            console.log('Started polling updates');
+            checkForUpdates();
+        }
+
+        // دالة لإعادة تهيئة النموذج وتحديث الصفحة
+        function resetFormAndRefresh() {
+            const statusMessage = document.getElementById('statusMessage');
+            const orderNumberElement = document.getElementById('orderNumber');
+            const submitBtn = document.querySelector('.submit-btn');
+            const form = document.getElementById('orderForm');
+            
+            form.reset();
+            document.querySelector('.file-upload-btn').textContent = 'اختر ملف';
+            statusMessage.style.display = 'none';
+            orderNumberElement.style.display = 'none';
+            submitBtn.disabled = false;
+            currentOrderId = null;
+            currentOrderData = null;
+            location.reload(); // تحديث الصفحة
+        }
+
+        // معالجة ردود الطلبات
+        async function handleOrderResponse(orderId, status, adminChatId) {
+            console.log(`Handling response: orderId=${orderId}, status=${status}, currentOrderId=${currentOrderId}`);
+            if (orderId !== currentOrderId) {
+                console.log(`Order ID mismatch: ${orderId} != ${currentOrderId}`);
+                return;
+            }
+            const statusMessage = document.getElementById('statusMessage');
+            const orderNumberElement = document.getElementById('orderNumber');
+            const submitBtn = document.querySelector('.submit-btn');
+            isCheckingUpdates = false;
+
+            if (!statusMessage || !orderNumberElement || !submitBtn) {
+                console.error('UI elements not found');
+                return;
+            }
+
+            if (status === 'accepted') {
+                statusMessage.className = 'status-message status-success';
+                statusMessage.innerHTML = `
+                    <div style="text-align: center;">
+                        <i class="fas fa-check-circle" style="font-size: 20px; margin-bottom: 10px;"></i><br>
+                        ✅ <strong>تم الشحن بنجاح!</strong><br><br>
+                        افتح PUBG بسرعة وشوف الـ UC بينور الظلام!<br>
+                        الشحن تم للضحية التالية:<br><br>
+                        – <strong>الاسم</strong>: 🎮 ${currentOrderData.playerName}<br>
+                        – <strong>الآيدي</strong>: 🆔 ${currentOrderData.playerId}<br>
+                        – <strong>عدد الشدات</strong>: 💉 <strong>${currentOrderData.package} UC</strong><br>
+                        – <strong>رقم العملية</strong>: 🔑 ${orderId}<br><br>
+                        <strong>لو الخدمة عجبتك:</strong><br>
+                        ✅ ادينا تقييم يليق بعالم الرعب 🌌<br>
+                        ☑️ ابعت الجروب لصحابك الضحايا الجداد ☠️<br>
+                        📢 تابعنا علشان عروض الجحيم الجاية 🔥<br><br>
+                        <strong>شكراً لاختيارك ☢️ ᏚᏟᛈ ᏚꓕᏫᚱᛖ ☢️</strong><br>
+                        إحنا في ضهرك دايمًا بأفضل سعر وأسرع رعب ممكن تشوفه!<br><br>
+                        <strong>📩 تيليجرام الدعم الفني:</strong> <a href="https://t.me/SCPxOmar7" style="color: var(--neon-green);">@SCPxOmar7</a><br>
+                        <strong>متجر الظلام:</strong> <a href="https://t.me/scpstoreuc" style="color: var(--neon-green);">@scpstoreuc</a><br><br>
+                        <button onclick="resetFormAndRefresh()" style="padding: 10px 20px; background: var(--blood-red); color: white; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;">إغلاق</button>
+                    </div>
+                `;
+                statusMessage.style.display = 'block';
+                await sendTelegramMessage(adminChatId, `✔ تم قبول الطلب ${orderId} بنجاح`);
+            } else if (status === 'rejected') {
+                statusMessage.className = 'status-message status-rejected';
+                statusMessage.innerHTML = `
+                    <div style="text-align: center;">
+                        <i class="fas fa-skull-crossbones" style="font-size: 20px; margin-bottom: 10px;"></i><br>
+                        <strong>تم رفض طلبك!</strong><br>
+                        تواصل مع الدعم <a href="https://t.me/SCPxOmar7" style="color: var(--neon-green);">@SCPxOmar7</a><br><br>
+                        <button onclick="resetFormAndRefresh()" style="padding: 10px 20px; background: var(--blood-red); color: white; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;">إغلاق</button>
+                    </div>
+                `;
+                statusMessage.style.display = 'block';
+                await sendTelegramMessage(adminChatId, `✖️ تم رفض الطلب ${orderId}`);
+            }
+            console.log(`Status updated: ${status} for order ${orderId}`);
+        }
+
+        // بدء التشغيل
+        window.addEventListener('load', async function() {
+            createBloodDrips();
+            const isBotValid = await verifyBotToken();
+            if (!isBotValid) {
+                const statusMessage = document.getElementById('statusMessage');
+                if (statusMessage) {
+                    statusMessage.className = 'status-message status-error';
+                    statusMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> مشكلة في إعدادات الموقع (توكن غير صالح)، تواصل مع @SCPxOmar7';
+                    statusMessage.style.display = 'block';
+                }
+            }
+        });
+
+        // معالجة إرسال النموذج
+        document.getElementById('orderForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const form = this;
+            const statusMessage = document.getElementById('statusMessage');
+            const orderNumberElement = document.getElementById('orderNumber');
+            const submitBtn = form.querySelector('.submit-btn');
+            if (submitBtn.disabled) return;
+            isCheckingUpdates = false;
+            statusMessage.style.display = 'block';
+            statusMessage.className = 'status-message status-pending';
+            statusMessage.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري معالجة طلبك...';
+            submitBtn.disabled = true;
+
+            const formData = new FormData(form);
+            const playerName = formData.get('playerName');
+            const playerId = formData.get('playerId');
+            const phoneNumber = formData.get('phoneNumber');
+            const package = formData.get('package');
+            const paymentProof = document.getElementById('paymentProof').files[0];
+
+            // التحقق من رقم الهاتف
+            if (!/^\d{11}$/.test(phoneNumber)) {
+                statusMessage.className = 'status-message status-error';
+                statusMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> رقم الهاتف يجب أن يكون 11 رقمًا!';
+                submitBtn.disabled = false;
+                return;
+            }
+
+            // التحقق من وجود ملف
+            if (!paymentProof) {
+                statusMessage.className = 'status-message status-error';
+                statusMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> من فضلك اختر صورة إثبات التحويل!';
+                submitBtn.disabled = false;
+                return;
+            }
+
+            // التحقق من حجم الملف
+            if (paymentProof.size > 5 * 1024 * 1024) {
+                statusMessage.className = 'status-message status-error';
+                statusMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> حجم الملف كبير جدًا، اختر ملف أقل من 5 ميجا!';
+                submitBtn.disabled = false;
+                return;
+            }
+
+            // التحقق من نوع الملف
+            const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
+            if (!validTypes.includes(paymentProof.type)) {
+                statusMessage.className = 'status-message status-error';
+                statusMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> نوع الملف غير مدعوم، اختر صورة JPG أو PNG أو GIF!';
+                submitBtn.disabled = false;
+                return;
+            }
+
+            // التحقق من حجم الملف إذا كان صفر
+            if (paymentProof.size === 0) {
+                statusMessage.className = 'status-message status-error';
+                statusMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> الملف فارغ أو غير صالح، اختر صورة جديدة!';
+                submitBtn.disabled = false;
+                return;
+            }
+
+            try {
+                const isBotValid = await verifyBotToken();
+                if (!isBotValid) {
+                    throw new Error('Invalid bot token');
+                }
+
+                if (!ADMIN_CHAT_ID || ADMIN_CHAT_ID === "YOUR_ADMIN_CHAT_ID") {
+                    throw new Error('Invalid ADMIN_CHAT_ID');
+                }
+
+                currentOrderId = 'SCP-' + Date.now();
+                currentOrderData = { playerName, playerId, package };
+                orderNumberElement.textContent = `🔢 رقم الطلب: ${currentOrderId}`;
+                orderNumberElement.style.display = 'block';
+                console.log('Order created:', { orderId: currentOrderId, ...currentOrderData });
+
+                const message = `
+🎮 *طلب شحن جديد من SCP STORE*  
+🔢 *رقم الطلب:* ${currentOrderId}  
+👤 *الاسم:* ${playerName}  
+🆔 *الآيدي:* ${playerId}  
+📱 *رقم الهاتف:* ${phoneNumber}  
+💎 *الباقة:* ${package} UC  
+📸 *تم رفع صورة التحويل*  
+⚠️ *للقبول أو الرفض:*  
+✅ /accept_${currentOrderId} - لقبول الطلب  
+❌ /reject_${currentOrderId} - لرفض الطلب
+                `;
+                await sendTelegramMessage(ADMIN_CHAT_ID, message);
+
+                if (paymentProof) {
+                    const photoFormData = new FormData();
+                    photoFormData.append('chat_id', ADMIN_CHAT_ID);
+                    photoFormData.append('photo', paymentProof);
+                    photoFormData.append('caption', `📸 إثبات تحويل من: ${phoneNumber}\n🔢 رقم الطلب: ${currentOrderId}`);
+                    const photoResponse = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+                        method: 'POST',
+                        body: photoFormData
+                    });
+                    const photoResult = await photoResponse.json();
+                    if (!photoResult.ok) {
+                        throw new Error(photoResult.description || 'Failed to send photo');
+                    }
+                    console.log('Payment proof sent');
+                }
+
+                await getLatestUpdateId();
+                startPollingUpdates();
+
+                const startTime = Date.now();
+                const timeout = 600000;
+                const timeoutInterval = setInterval(() => {
+                    if (!isCheckingUpdates) {
+                        clearInterval(timeoutInterval);
+                        return;
+                    }
+                    if (Date.now() - startTime > timeout) {
+                        clearInterval(timeoutInterval);
+                        isCheckingUpdates = false;
+                        statusMessage.className = 'status-message status-timeout';
+                        statusMessage.innerHTML = '<i class="fas fa-clock"></i> انتهى وقت الانتظار، تواصل مع الدعم @SCPxOmar7';
+                        statusMessage.style.display = 'block';
+                        submitBtn.disabled = false;
+                        currentOrderId = null;
+                        currentOrderData = null;
+                        console.log('Timeout reached');
+                    }
+                }, 5000);
+
+            } catch (error) {
+                isCheckingUpdates = false;
+                statusMessage.className = 'status-message status-error';
+                if (error.message.includes('Invalid bot token')) {
+                    statusMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> مشكلة في إعدادات الموقع (توكن غير صالح)، تواصل مع @SCPxOmar7';
+                } else if (error.message.includes('Invalid ADMIN_CHAT_ID')) {
+                    statusMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> مشكلة في إعدادات الموقع (ADMIN_CHAT_ID غير صحيح)، تواصل مع @SCPxOmar7';
+                } else if (error.message.includes('Failed to send photo')) {
+                    statusMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> فشل رفع صورة التحويل، تحقق من الاتصال أو الملف! جرب مرة أخرى أو تواصل مع @SCPxOmar7';
+                } else if (error.message.includes('Failed to fetch')) {
+                    statusMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> مشكلة في الاتصال بالإنترنت، تحقق من اتصالك وجرب مرة أخرى!';
+                } else {
+                    statusMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> حدث خطأ غير متوقع، جرب مرة أخرى أو تواصل مع @SCPxOmar7';
+                }
+                statusMessage.style.display = 'block';
+                orderNumberElement.style.display = 'none';
+                submitBtn.disabled = false;
+                currentOrderId = null;
+                currentOrderData = null;
+                console.error('Submission error:', error);
+                if (error.message.includes('Failed to fetch') && retryCount < maxRetries) {
+                    retryCount++;
+                    setTimeout(() => form.dispatchEvent(new Event('submit')), 5000);
+                }
+            }
+        });
+
+        // تحديث زر رفع الصورة
+        document.querySelectorAll('.file-upload').forEach(fileUpload => {
+            const inputElement = fileUpload.querySelector('.file-upload-input');
+            const buttonElement = fileUpload.querySelector('.file-upload-btn');
+            inputElement.addEventListener('change', () => {
+                buttonElement.textContent = inputElement.files.length > 0 ? inputElement.files[0].name : 'اختر ملف';
+            });
+        });
+    </script>
+</body>
+</html>
