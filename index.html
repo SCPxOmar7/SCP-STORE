@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="public, max-age=31536000">
+    <title>SCP STORE - متجر شحن UC المرعب</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+        
+        :root {
+            --blood-red: #8a0303;
+            --neon-green: #0fff50;
+            --dark-bg: #050505;
+            --glow: 0 0 20px;
+            --shadow-red: 0 0 15px rgba(138, 3, 3, 0.7);
+            --shadow-green: 0 0 15px rgba(15, 255, 80, 0.7);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--dark-bg);
+            color: white;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://i.ibb.co/RKPdjV7/file-0000000048f061f695ba394c2cd3d5ea.png');
+            background-size: cover;
+            background-attachment: fixed;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+            cursor: url('https://i.imgur.com/5Q1b7vX.png'), auto;
+        }
+        
+        .blood-drips {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 1;
+        }
+        
+        .blood-drip {
+            position: absolute;
+            width: 4px;
+            background: var(--blood-red);
+            animation: drip 10s infinite;
+            filter: drop-shadow(0 0 8px var(--blood-red));
+        }
+        
+        .nuclear-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0,255,0,0.15) 0%, transparent 70%);
+            animation: nuclearPulse 20s infinite;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.5;
+        }
+        
+        .fog-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.5));
+            opacity: 0.5;
+            animation: fogMove 60s linear infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        @keyframes drip {
+            0% { height: 0; top: -100px; opacity: 0; }
+            20% { opacity: 1; }
+            100% { height: 100vh; opacity: 0.7; }
+        }
+        
+        @keyframes nuclearPulse {
+            0% { transform: scale(0.9); opacity: 0; }
+            50% { transform: scale(1.3); opacity: 0.8; }
+            100% { transform: scale(0.9); opacity: 0; }
+        }
+        
+        @keyframes fogMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 1500px 0; }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+            background-color: rgba(0, 0, 0, 0.85);
+            min-height: 100vh;
+            border: 2px solid var(--neon-green);
+            box-shadow: var(--shadow-green);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            max-width: 200px;
+            margin: 0 auto;
+            display: block;
+            filter: drop-shadow(var(--glow) var(--neon-green));
+            animation: flicker 3s infinite;
+        }
+        
+        .name-image {
+            max-width: 70%;
+            margin: 10px auto 0;
+            filter: drop-shadow(var(--glow) var(--neon-green));
+            animation: flicker 2s infinite;
+        }
+        
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+            20%, 24%, 55% { opacity: 0.6; }
+        }
+        
+        .payment-info {
+            background: linear-gradient(135deg, rgba(10, 0, 0, 0.9), rgba(20, 0, 0, 0.9));
+            border: 3px solid var(--neon-green);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 40px auto;
+            max-width: 900px;
+            box-shadow: var(--shadow-green), var(--shadow-red);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .payment-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(15, 255, 80, 0.1), transparent);
+            animation: glowSweep 4s infinite;
+        }
+        
+        @keyframes glowSweep {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .payment-info h2 {
+            color: var(--neon-green);
+            text-align: center;
+            margin-top: 0;
+            font-size: 2rem;
+            text-shadow: var(--glow) var(--neon-green);
+        }
+        
+        .payment-methods, .steps {
+            margin: 25px 0;
+        }
+        
+        .payment-methods li, .steps li {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .prices-section {
+            margin: 50px 0;
+            text-align: center;
+        }
+        
+        .prices-section h2 {
+            color: var(--neon-green);
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            text-shadow: var(--glow) var(--neon-green);
+            animation: pulse 2s infinite;
+        }
+        
+        .prices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 0 20px;
+            perspective: 1000px;
+        }
+        
+        .price-card {
+            background: linear-gradient(135deg, rgba(10, 0, 0, 0.95), rgba(20, 0, 0, 0.95));
+            border: 3px solid var(--neon-green);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.4s;
+            box-shadow: var(--shadow-green), var(--shadow-red);
+            transform: rotateY(0deg);
+            transform-style: preserve-3d;
+        }
+        
+        .price-card:hover {
+            transform: translateY(-15px) rotateY(10deg);
+            box-shadow: 0 20px 60px rgba(15, 255, 80, 0.8), 0 15px 30px rgba(139, 0, 0, 0.7);
+            border-color: var(--blood-red);
+        }
+        
+        .price-card h3 {
+            color: var(--neon-green);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            text-shadow: var(--glow) var(--neon-green);
+        }
+        
+        .price-card p {
+            color: #eee;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+        
+        .price-card .buy-btn {
+            background: var(--blood-red);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow-red);
+        }
+        
+        .price-card .buy-btn:hover {
+            background: #6a0000;
+            box-shadow: 0 0 30px var(--blood-red);
+            transform: scale(1.05);
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, rgba(10, 0, 0, 0.9), rgba(20, 0, 0, 0.9));
+            border: 3px solid var(--blood-red);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 40px auto;
+            max-width: 900px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-red);
+        }
+        
+        .warning-box::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 48%, rgba(255, 0, 0, 0.15) 50%, transparent 52%);
+            background-size: 12px 12px;
+            animation: warningStripe 1.2s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes warningStripe {
+            0% { background-position: 0 0; }
+            100% { background-position: 12px 0; }
+        }
+        
+        .warning-title {
+            color: var(--blood-red);
+            text-shadow: var(--glow) var(--blood-red);
+            font-size: 2rem;
+            margin-top: 0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .warning-text {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            margin-bottom: 0;
+            text-align: center;
+        }
+        
+        .channel-box {
+            background: linear-gradient(135deg, rgba(0, 10, 0, 0.9), rgba(0, 20, 0, 0.9));
+            border: 3px solid var(--neon-green);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 40px auto;
+            max-width: 900px;
+            text-align: center;
+            box-shadow: var(--shadow-green);
+        }
+        
+        .channel-box a {
+            color: var(--neon-green);
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1.3rem;
+            text-shadow: var(--glow) var(--neon-green);
+        }
+        
+        .channel-box a:hover {
+            color: var(--blood-red);
+            text-shadow: var(--glow) var(--blood-red);
+        }
+        
+        .trust-section {
+            margin: 50px 0;
+            text-align: center;
+        }
+        
+        .trust-section h2 {
+            color: var(--neon-green);
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            text-shadow: var(--glow) var(--neon-green);
+        }
+        
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            padding: 0 20px;
+        }
+        
+        .trust-item {
+            background: linear-gradient(135deg, rgba(10, 0, 0, 0.95), rgba(20, 0, 0, 0.95));
+            border: 2px solid var(--neon-green);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--shadow-green);
+            transition: transform 0.3s;
+        }
+        
+        .trust-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .trust-item i {
+            font-size: 2.5rem;
+            color: var(--neon-green);
+            margin-bottom: 15px;
+            text-shadow: var(--glow) var(--neon-green);
+        }
+        
+        .trust-item p {
+            font-size: 1.2rem;
+            color: #ddd;
+        }
+        
+        .order-form {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(10, 0, 0, 0.8));
+            border: 3px solid var(--neon-green);
+            border-radius: 15px;
+            padding: 35px;
+            margin: 50px auto;
+            max-width: 650px;
+            box-shadow: var(--shadow-green), var(--shadow-red);
+            position: relative;
+        }
+        
+        .status-message {
+            display: none;
+            text-align: center;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        
+        .status-pending { background-color: rgba(255, 165, 0, 0.2); border: 1px solid orange; color: orange; }
+        .status-success { background-color: rgba(0, 255, 0, 0.2); border: 1px solid lime; color: lime; }
+        .status-error { background-color: rgba(255, 0, 0, 0.2); border: 1px solid red; color: red; }
+        .status-rejected { background-color: rgba(139, 0, 0, 0.3); border: 1px solid var(--blood-red); color: #ff6b6b; text-shadow: 0 0 5px rgba(255, 0, 0, 0.5); }
+        .status-timeout { background-color: rgba(255, 165, 0, 0.3); border: 1px solid orange; color: orange; }
+        
+        #storeStatus {
+            text-align: center;
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            max-width: 900px;
+        }
+        #storeStatus.closed {
+            background-color: rgba(139, 0, 0, 0.3);
+            border: 2px solid var(--blood-red);
+            color: #ff6b6b;
+            text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+        }
+        #storeStatus.open {
+            display: none;
+        }
+        
+        .order-number {
+            color: var(--neon-green);
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.3rem;
+            display: none;
+            text-shadow: var(--glow) var(--neon-green);
+        }
+        
+        .form-group {
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 12px;
+            color: var(--neon-green);
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-shadow: var(--glow) var(--neon-green);
+        }
+        
+        .form-group i {
+            position: absolute;
+            right: 15px;
+            top: 50px;
+            color: var(--neon-green);
+            font-size: 1.3rem;
+            text-shadow: var(--glow) var(--neon-green);
+        }
+        
+        input {
+            width: 100%;
+            padding: 15px;
+            background-color: rgba(20, 20, 20, 0.9);
+            border: 2px solid var(--blood-red);
+            border-radius: 8px;
+            color: white;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.2rem;
+            transition: all 0.4s;
+            box-shadow: var(--shadow-red);
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: var(--neon-green);
+            box-shadow: 0 0 30px rgba(15, 255, 80, 0.9);
+            background-color: rgba(30, 30, 30, 0.9);
+        }
+        
+        .file-upload {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .file-upload-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--blood-red);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.4s;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-red);
+        }
+        
+        .file-upload-btn:hover {
+            background: #6a0000;
+            box-shadow: 0 0 30px var(--blood-red);
+            transform: scale(1.02);
+        }
+        
+        .file-upload-btn::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: all 0.6s;
+        }
+        
+        .file-upload-btn:hover::after {
+            left: 100%;
+        }
+        
+        .file-upload-input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(90deg, var(--blood-red), #6a0000);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.4rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(139, 0, 0, 0.8);
+        }
+        
+        .submit-btn:hover {
+            background: linear-gradient(90deg, #6a0000, var(--blood-red));
+            box-shadow: 0 20px 60px rgba(139, 0, 0, 1);
+            text-shadow: var(--glow) white;
+            transform: scale(1.02);
+        }
+        
+        .submit-btn:disabled {
+            background: grey;
+            cursor: not-allowed;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #666;
+            font-size: 1rem;
+            border-top: 2px solid rgba(139, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.95);
+            margin-top: 60px;
+        }
+        
+        .footer-logo {
+            max-width: 120px;
+            margin-bottom: 15px;
+            filter: drop-shadow(var(--glow) var(--neon-green));
+            animation: flicker 3s infinite;
+        }
+        
+        .social-icons a {
+            color: var(--neon-green);
+            margin: 0 15px;
+            font-size: 1.8rem;
+            transition: all 0.4s;
+            text-shadow: var(--glow) var(--neon-green);
+        }
+        
+        .social-icons a:hover {
+            color: var(--blood-red);
+            text-shadow: var(--glow) var(--blood-red);
+        }
+        
+        .telegram-username {
+            color: var(--neon-green);
+            font-weight: bold;
+            margin: 10px 0;
+            font-size: 1.1rem;
+            text-shadow: var(--glow) var(--neon-green);
+        }
+        
+        @media (max-width: 768px) {
+            .container { padding: 15px; }
+            .name-image { max-width: 95%; }
+            .logo { max-width: 140px; }
+            .footer-logo { max-width: 100px; }
+            .price-card { padding: 20px; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=fetch,FormData"></script>
+</head>
+<body>
+    <div class="blood-drips" id="bloodDrips"></div>
+    <div class="nuclear-effect"></div>
+    <div class="fog-effect"></div>
+    
+    <div class="container">
+        <div id="storeStatus" class="status-message" style="display: none;"></div>
+        <div class="header">
+            <img src="https://i.ibb.co/XZK5XwsD/file-0000000014fc6230abdd6164376e6220.png" alt="SCP STORE Logo" class="logo" onerror="this.style.display='none';">
+            <img src="https://i.ibb.co/7xrsrjgP/Background-Eraser-20250527-104845857.png" alt="SCP STORE" class="name-image" onerror="this.style.display='none';">
+        </div>
+        
+        <div class="payment-info">
+            <h2>☢️ ᏚᏟᏢ ᏚᎢᎾᎡᎬ ☢️</h2>
+            <p style="text-align: center; font-size: 1.3rem; margin-bottom: 25px;">الشحن من قلب الجحيم</p>
+            <p style="text-align: center; margin-bottom: 25px;">
+                🚀 شدات PUBG بسرعة خرافية، أمان جحيمي، وأسعار رسميّة من عالم مرعب!
+            </p>
+            <div class="payment-methods">
+                <h3 style="color: var(--neon-green); text-align: center;">💳 طرق الدفع:</h3>
+                <ul style="list-style-type: none; padding: 0;">
+                    <li>☣️ فودافون كاش</li>
+                    <li>☠️ اتصالات كاش</li>
+                    <li>⚰️ أورنج كاش</li>
+                    <li>☢️ WE Pay</li>
+                </ul>
+                <p style="text-align: center; margin-top: 20px;">
+                    (على الرقم: 01154939016 ☎️)
+                </p>
+            </div>
+            <div class="steps">
+                <h3 style="color: var(--neon-green); text-align: center;">⚙️ خطوات الشحن:</h3>
+                <ol>
+                    <li>أدخل اسمك في اللعبة + الـ ID في النموذج أدناه.</li>
+                    <li>اختر باقتك من باقات اللعنة.</li>
+                    <li>اضغط التالي وانتظر التأكيد.</li>
+                    <li>حوّل المبلغ المطلوب وابعت إثبات التحويل.</li>
+                </ol>
+                <p style="text-align: center; color: var(--neon-green); margin-top: 20px;">
+                    ⚡ شحن فوري - سهل وسريع!
+                </p>
+            </div>
+        </div>
+        
+        <div class="channel-box">
+            <h3 style="color: var(--neon-green); margin-top: 0;">❗ يجب الاشتراك في قناتنا أولاً</h3>
+            <p>لضمان استلام التحديثات والعروض الخاصة</p>
+            <a href="https://t.me/scpstoreuc" target="_blank">👉 انقر هنا للاشتراك في قناة SCP STORE 👈</a>
+        </div>
+        
+        <section class="prices-section">
+            <h2>💎 اختر باقتك من باقات اللعنة</h2>
+            <div class="prices-grid">
+                <div class="price-card">
+                    <h3>60 UC</h3>
+                    <p>جنيه 50</p>
+                    <button class="buy-btn" onclick="setPackage('60', 50); document.querySelector('.order-form').scrollIntoView({behavior: 'smooth'});">اشتري دلوقتي</button>
+                </div>
+                <div class="price-card">
+                    <h3>325 UC</h3>
+                    <p>جنيه 240</p>
+                    <button class="buy-btn" onclick="setPackage('325', 240); document.querySelector('.order-form').scrollIntoView({behavior: 'smooth'});">اشتري دلوقتي</button>
+                </div>
+                <div class="price-card">
+                    <h3>660 UC</h3>
+                    <p>جنيه 480</p>
+                    <button class="buy-btn" onclick="setPackage('660', 480); document.querySelector('.order-form').scrollIntoView({behavior: 'smooth'});">اشتري دلوقتي</button>
+                </div>
+                <div class="price-card">
+                    <h3>1800 UC</h3>
+                    <p>جنيه 1180</p>
+                    <button class="buy-btn" onclick="setPackage('1800', 1180); document.querySelector('.order-form').scrollIntoView({behavior: 'smooth'});">اشتري دلوقتي</button>
+                </div>
+            </div>
+        </section>
+        
+        <div class="warning-box">
+            <h2 class="warning-title">⚠️ تحذير</h2>
+            <p class="warning-text">
+                تأكد من صحة بياناتك قبل إرسال الطلب.<br>
+                ستظهر حالة طلبك (مقبول أو مرفوض) على الموقع خلال دقائق.<br>
+                للاستفسار: <a href="https://t.me/SCPxOmar7" style="color: var(--neon-green); text-decoration: underline;">@SCPxOmar7</a>
+            </p>
+        </div>
+        
+        <div class="order-form">
+            <h2 style="text-align: center; color: var(--neon-green); margin-top: 0;">طلب شحن UC</h2>
+            <div id="statusMessage" class="status-message"></div>
+            <div id="orderNumber" class="order-number"></div>
+            <form id="orderForm">
+                <div class="form-group">
+                    <label for="playerName">اسم اللاعب في PUBG:</label>
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="playerName" name="playerName" required placeholder="أدخل اسم اللاعب في اللعبة">
+                </div>
+                <div class="form-group">
+                    <label for="playerId">آيدي اللاعب:</label>
+                    <i class="fas fa-id-card"></i>
+                    <input type="text" id="playerId" name="playerId" required placeholder="أدخل الآيدي الخاص بك">
+                </div>
+                <div class="form-group">
+                    <label for="telegramUsername">اليوزر نيم في تيليجرام (اختياري):</label>
+                    <i class="fab fa-telegram-plane"></i>
+                    <input type="text" id="telegramUsername" name="telegramUsername" placeholder="أدخل يوزر نيمك (مثل @username)">
+                </div>
+                <button type="submit" class="submit-btn">التالي</button>
+            </form>
+            <div id="paymentSection" style="display: none; margin-top: 30px;">
+                <h3 style="color: var(--neon-green); text-align: center; margin-bottom: 20px;">💳 إتمام عملية التحويل</h3>
+                <p style="text-align: center; margin-bottom: 20px;">
+                    برجاء تحويل المبلغ: <strong id="amountToPay"></strong> جنيه<br>
+                    على الرقم: <strong>01154939016</strong><br>
+                    (فودافون كاش / اتصالات كاش / أورنج كاش / WE Pay)
+                </p>
+                <form id="paymentForm">
+                    <div class="form-group">
+                        <label for="phoneNumber">رقم الهاتف المحول منه:</label>
+                        <i class="fas fa-phone"></i>
+                        <input type="text" id="phoneNumber" name="phoneNumber" required placeholder="أدخل رقم الهاتف المحول منه" pattern="\d{11}" title="رقم الهاتف يجب أن يكون 11 رقمًا">
+                    </div>
+                    <div class="form-group">
+                        <label for="paymentProof">صورة إثبات التحويل:</label>
+                        <div class="file-upload">
+                            <button type="button" class="file-upload-btn">اختر ملف</button>
+                            <input type="file" id="paymentProof" name="paymentProof" class="file-upload-input" accept="image/jpeg,image/png,image/gif" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn">إرسال التحويل</button>
+                </form>
+            </div>
+        </div>
+        
+        <section class="trust-section">
+            <h2>لماذا تختار SCP STORE؟</h2>
+            <div class="trust-grid">
+                <div class="trust-item">
+                    <i class="fas fa-bolt"></i>
+                    <p>شحن فوري وسريع</p>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <p>دفع آمن 100%</p>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-headset"></i>
+                    <p>دعم 24/7</p>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <p>أسعار رسمية</p>
+                </div>
+            </div>
+        </section>
+        
+        <div class="footer">
+            <img src="https://i.ibb.co/XZK5XwsD/file-0000000014fc6230abdd6164376e6220.png" alt="SCP STORE Logo" class="footer-logo" onerror="this.style.display='none';">
+            <p>© 2025 SCP STORE - جميع الحقوق محافظة</p>
+            <div class="social-icons">
+                <a href="https://t.me/SCPxOmar7"><i class="fab fa-telegram-plane"></i></a>
+            </div>
+            <p class="telegram-username">📩 تيليجرام الدعم الفني: @SCPxOmar7</p>
+            <p class="telegram-username">متجر الظلام: @scpstoreuc</p>
+        </div>
+    </div>
+    
+    <script>
+        function createBloodDrips() {
+            const container = document.getElementById('bloodDrips');
+            const dripCount = 10;
+            for (let i = 0; i < dripCount; i++) {
+                const drip = document.createElement('div');
+                drip.classList.add('blood-drip');
+                const left = Math.random() * 100;
+                const delay = Math.random() * 12;
+                const duration = 6 + Math.random() * 8;
+                const width = 2 + Math.random() * 5;
+                drip.style.left = `${left}%`;
+                drip.style.animationDelay = `${delay}s`;
+                drip.style.animationDuration = `${duration}s`;
+                drip.style.width = `${width}px`;
+                container.appendChild(drip);
+            }
+        }
+
+        const BOT_TOKEN = "7707731867:AAF1KHTZk0qMqxen_-v4U_iamkUqUbwgkuQ";
+        const ADMIN_CHAT_ID = "6061554033";
+        let currentOrderId = null;
+        let isCheckingUpdates = false;
+        let lastUpdateId = 0;
+        let currentOrderData = null;
+        let retryCount = 0;
+        const maxRetries = 5;
+        let selectedPackage = null;
+        let selectedAmount = null;
+        let isWaitingForPayment = false;
+        // قراءة حالة المتجر من localStorage عند تحميل الموقع
+        let isStoreOpen = localStorage.getItem('isStoreOpen') ? JSON.parse(localStorage.getItem('isStoreOpen')) : true;
+
+        function updateStoreStatus() {
+            const storeStatus = document.getElementById('storeStatus');
+            if (storeStatus) {
+                if (isStoreOpen) {
+                    storeStatus.className = 'status-message open';
+                    storeStatus.style.display = 'none';
+                    document.getElementById('orderForm').style.display = 'block';
+                } else {
+                    storeStatus.className = 'status-message closed';
+                    storeStatus.innerHTML = '<i class="fas fa-exclamation-triangle"></i> لا يوجد شحن الآن، حاول في وقت آخر!';
+                    storeStatus.style.display = 'block';
+                    document.getElementById('orderForm').style.display = 'none';
+                }
+            }
+        }
+
+        async function toggleStoreStatus() {
+            isStoreOpen = !isStoreOpen;
+            localStorage.setItem('isStoreOpen', JSON.stringify(isStoreOpen));
+            const statusText = isStoreOpen ? 'مفتوح' : 'مغلق';
+            updateStoreStatus();
+            await sendTelegramMessage(ADMIN_CHAT_ID, `✅ حالة المتجر: ${statusText}`, {
+                inline_keyboard: [
+                    [
+                        { text: isStoreOpen ? '🔒 قفل المتجر' : '🔓 فتح المتجر', callback_data: 'toggle_store' }
+                    ]
+                ]
+            });
+        }
+
+        function setPackage(packageValue, amount) {
+            selectedPackage = packageValue;
+            selectedAmount = amount;
+            console.log(`Selected package: ${selectedPackage}, Amount: ${selectedAmount}`);
+        }
+
+        async function verifyBotToken() {
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getMe`, {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                const data = await response.json();
+                console.log('API Response for token verification:', data);
+                if (data.ok) {
+                    console.log(`Bot verified: @${data.result.username}`);
+                    return true;
+                } else {
+                    console.error(`Token verification failed: ${data.description}`);
+                    const statusMessage = document.getElementById('statusMessage');
+                    if (statusMessage) {
+                        statusMessage.className = 'status-message status-error';
+                        statusMessage.innerHTML = `<i class="fas fa-exclamation-triangle"></i> مشكلة في التوكن: ${data.description}، تواصل مع @SCPxOmar7`;
+                        statusMessage.style.display = 'block';
+                    }
+                    return false;
+                }
+            } catch (error) {
+                console.error('Error verifying token:', error.message);
+                const statusMessage = document.getElementById('statusMessage');
+                if (statusMessage) {
+                    statusMessage.className = 'status-message status-error';
+                    statusMessage.innerHTML = `<i class="fas fa-exclamation-triangle"></i> خطأ في الاتصال بتيليجرام: ${error.message}، تواصل مع @SCPxOmar7`;
+                    statusMessage.style.display = 'block';
+                }
+                return false;
+            }
+        }
+
+        async function sendTelegramMessage(chatId, text, replyMarkup = {}) {
+            try {
+                const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: text,
+                        parse_mode: 'Markdown',
+                        reply_markup: replyMarkup
+                    })
+                });
+                const result = await response.json();
+                if (!result.ok) throw new Error(result.description || 'Failed to send message');
+                console.log(`Message sent to ${chatId}: ${text}`);
+                return result;
+            } catch (error) {
+                console.error('Error sending message:', error);
+                throw error;
+            }
+        }
+
+        async function sendTelegramPhoto(chatId, photo, caption) {
+            try {
+                const formData = new FormData();
+                formData.append('chat_id', chatId);
+                formData.append('photo', photo);
+                formData.append('caption', caption);
+                const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                if (!result.ok) throw new Error(result.description || 'Failed to send photo');
+                console.log('Photo sent successfully');
+                return result;
+            } catch (error) {
+                console.error('Error sending photo:', error);
+                throw error;
+            }
+        }
+
+        async function getLatestUpdateId() {
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getUpdates?limit=1`);
+                const data = await response.json();
+                if (data.ok && data.result.length > 0) {
+                    lastUpdateId = data.result[data.result.length - 1].update_id;
+                    console.log(`Latest update ID: ${lastUpdateId}`);
+                } else {
+                    console.log('No updates found, starting with update ID 0');
+                }
+            } catch (error) {
+                console.error('Error fetching initial updates:', error);
+            }
+        }
+
+        async function checkForUpdates() {
+            if (!isCheckingUpdates || retryCount >= maxRetries) {
+                console.log('Stopped polling updates');
+                return;
+            }
+            try {
+                console.log(`Checking for updates with offset ${lastUpdateId + 1}...`);
+                const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getUpdates?offset=${lastUpdateId + 1}&timeout=30`);
+                const data = await response.json();
+                console.log('Received updates:', data);
+                retryCount = 0;
+                if (data.ok) {
+                    if (data.result.length > 0) {
+                        for (const update of data.result) {
+                            lastUpdateId = update.update_id;
+                            console.log(`Processing update ID: ${lastUpdateId}`);
+
+                            if (update.message && update.message.text) {
+                                if (update.message.chat.id == ADMIN_CHAT_ID) {
+                                    if (update.message.text === '/toggle_store') {
+                                        console.log('Received /toggle_store command from admin');
+                                        await toggleStoreStatus();
+                                    } else if (update.message.text === '/test') {
+                                        console.log('Received /test command');
+                                        await sendTelegramMessage(ADMIN_CHAT_ID, '✅ البوت شغال! جرب /toggle_store مرة تانية.');
+                                    }
+                                }
+                            } else if (update.callback_query) {
+                                const callbackData = update.callback_query.data;
+                                const callbackQueryId = update.callback_query.id;
+                                console.log(`Received callback: ${callbackData}`);
+                                if (callbackData === 'toggle_store') {
+                                    console.log('Received toggle_store callback');
+                                    await toggleStoreStatus();
+                                    await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/answerCallbackQuery`, {
+                                        method: 'POST',
+                                        headers: { 'Content-Type': 'application/json' },
+                                        body: JSON.stringify({ callback_query_id: callbackQueryId })
+                                    });
+                                } else if (callbackData.startsWith('proceed_')) {
+                                    const orderId = callbackData.split('_')[1];
+                                    await handleProceedOrder(orderId);
+                                    await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/answerCallbackQuery`, {
+                                        method: 'POST',
+                                        headers: { 'Content-Type': 'application/json' },
+                                        body: JSON.stringify({ callback_query_id: callbackQueryId })
+                                    });
+                                } else if (callbackData.startsWith('reject_initial_')) {
+                                    const orderId = callbackData.split('_')[2];
+                                    await handleInitialRejectOrder(orderId);
+                                    await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/answerCallbackQuery`, {
+                                        method: 'POST',
+                                        headers: { 'Content-Type': 'application/json' },
+                                        body: JSON.stringify({ callback_query_id: callbackQueryId })
+                                    });
+                                } else if (callbackData.startsWith('accept_')) {
+                                    const orderId = callbackData.split('_')[1];
+                                    await handleOrderResponse(orderId, 'accepted');
+                                    await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/answerCallbackQuery`, {
+                                        method: 'POST',
+                                        headers: { 'Content-Type': 'application/json' },
+                                        body: JSON.stringify({ callback_query_id: callbackQueryId })
+                                    });
+                                } else if (callbackData.startsWith('reject_')) {
+                                    const orderId = callbackData.split('_')[1];
+                                    await handleOrderResponse(orderId, 'rejected');
+                                    await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/answerCallbackQuery`, {
+                                        method: 'POST',
+                                        headers: { 'Content-Type': 'application/json' },
+                                        body: JSON.stringify({ callback_query_id: callbackQueryId })
+                                    });
+                                }
+                            } else {
+                                console.log('Ignored update:', update);
+                            }
+                        }
+                    } else {
+                        console.log('No new updates');
+                    }
+                    if (isCheckingUpdates) setTimeout(checkForUpdates, 1000);
+                } else {
+                    console.error(`Telegram API error: ${data.description}`);
+                    if (data.error_code === 401) {
+                        isCheckingUpdates = false;
+                        const statusMessage = document.getElementById('statusMessage');
+                        if (statusMessage) {
+                            statusMessage.className = 'status-message status-error';
+                            statusMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> مشكلة في إعدادات الموقع (توكن غير صالح)، تواصل مع @SCPxOmar7';
+                            statusMessage.style.display = 'block';
+                        }
+                    } else {
+                        retryCount++;
+                        console.log(`Retrying after error (attempt ${retryCount}/${maxRetries})`);
+                        setTimeout(checkForUpdates, 1000 * Math.pow(2, retryCount));
+                    }
+                }
+            } catch (error) {
+                console.error('Error checking updates:', error.message);
+                retryCount++;
+                console.log(`Retrying after error (attempt ${retryCount}/${maxRetries})`);
+                setTimeout(checkForUpdates, 1000 * Math.pow(2, retryCount));
+            }
+        }
+
+        function startPollingUpdates() {
+            isCheckingUpdates = true;
+            retryCount = 0;
+            console.log('Started polling updates');
+            checkForUpdates();
+        }
+
+        function resetFormAndRefresh() {
+            const orderForm = document.getElementById('orderForm');
+            const paymentForm = document.getElementById('paymentForm');
+            const statusMessage = document.getElementById('statusMessage');
+            const orderNumberElement = document.getElementById('orderNumber');
+            const submitBtn = document.querySelector('#orderForm .submit-btn');
+            const paymentSection = document.getElementById('paymentSection');
+            
+            orderForm.reset();
+            paymentForm.reset();
+            document.querySelector('.file-upload-btn').textContent = 'اختر ملف';
+            statusMessage.style.display = 'none';
+            orderNumberElement.style.display = 'none';
+            submitBtn.disabled = false;
+            paymentSection.style.display = 'none';
+            currentOrderId = null;
+            currentOrderData = null;
+            selectedPackage = null;
+            selectedAmount = null;
+            isWaitingForPayment = false;
+            location.reload();
+        }
+
+        async function handleProceedOrder(orderId) {
+            if (orderId !== currentOrderId) {
+                console.log(`Order ID mismatch: ${orderId} != ${currentOrderId}`);
+                return;
+            }
+            isWaitingForPayment = true;
+            const statusMessage = document.getElementById('statusMessage');
+            const paymentSection = document.getElementById('paymentSection');
+            const amountToPay = document.getElementById('amountToPay');
+            statusMessage.style.display = 'none';
+            paymentSection.style.display = 'block';
+            amountToPay.textContent = selectedAmount;
+            await sendTelegramMessage(ADMIN_CHAT_ID, `✔ تم تقديم الطلب ${orderId}، في انتظار إتمام التحويل`);
+        }
+
+        async function handleInitialRejectOrder(orderId) {
+            if (orderId !== currentOrderId) {
+                console.log(`Order ID mismatch: ${orderId} != ${currentOrderId}`);
+                return;
+            }
+            const statusMessage = document.getElementById('statusMessage');
+            const orderNumberElement = document.getElementById('orderNumber');
+            const submitBtn = document.querySelector('#orderForm .submit-btn');
+            isCheckingUpdates = false;
+
+            if (!statusMessage || !orderNumberElement || !submitBtn) {
+                console.error('UI elements not found');
+                return;
+            }
+
+            statusMessage.className = 'status-message status-rejected';
+            statusMessage.innerHTML = `
+                <div style="text-align: center;">
+                    <i class="fas fa-skull-crossbones" style="font-size: 20px; margin-bottom: 10px;"></i><br>
+                    <strong>تم رفض الطلب!</strong><br>
+                    تواصل مع الدعم <a href="https://t.me/SCPxOmar7" style="color: var(--neon-green);">@SCPxOmar7</a> أو حاول في وقت لاحق<br><br>
+                    <button onclick="resetFormAndRefresh()" style="padding: 12px 25px; background: var(--blood-red); color: white; border: none; border-radius: 8px; cursor: pointer; margin-top: 15px;">إغلاق</button>
+                </div>
+            `;
+            statusMessage.style.display = 'block';
+            await sendTelegramMessage(ADMIN_CHAT_ID, `✖️ تم رفض الطلب ${orderId}`);
+            if (currentOrderData.telegramUsername && currentOrderData.telegramUsername !== 'غير محدد') {
+                const username = currentOrderData.telegramUsername.startsWith('@') ? currentOrderData.telegramUsername : `@${currentOrderData.telegramUsername}`;
+                await sendTelegramMessage(username, `
+❌ *تم رفض طلبك!* ❌  
+🔢 *رقم الطلب:* \`${orderId}\`  
+👤 *الاسم:* ${currentOrderData.playerName}  
+🆔 *الآيدي:* ${currentOrderData.playerId}  
+💎 *الباقة:* ${currentOrderData.package} UC  
+تواصل مع الدعم لمعرفة السبب: @SCPxOmar7
+                `);
+            }
+        }
+
+        async function handleOrderResponse(orderId, status) {
+            if (orderId !== currentOrderId) {
+                console.log(`Order ID mismatch: ${orderId} != ${currentOrderId}`);
+                return;
+            }
+            const statusMessage = document.getElementById('statusMessage');
+            const orderNumberElement = document.getElementById('orderNumber');
+            const submitBtn = document.querySelector('#paymentForm .submit-btn');
+            const paymentSection = document.getElementById('paymentSection');
+            isCheckingUpdates = false;
+
+            if (!statusMessage || !orderNumberElement || !submitBtn) {
+                console.error('UI elements not found');
+                return;
+            }
+
+            if (status === 'accepted') {
+                statusMessage.className = 'status-message status-success';
+                statusMessage.innerHTML = `
+                    <div style="text-align: center;">
+                        <i class="fas fa-check-circle" style="font-size: 20px; margin-bottom: 10px;"></i><br>
+                        ✅ <strong>تم الشحن بنجاح!</strong><br><br>
+                        افتح PUBG بسرعة وشوف الـ UC بينور الظلام!<br>
+                        الشحن تم للضحية التالية:<br><br>
+                        – <strong>الاسم</strong>: 🎮 ${currentOrderData.playerName}<br>
+                        – <strong>الآيدي:</strong> 🆔 ${currentOrderData.playerId}<br>
+                        – <strong>اليوزر نيم في تيليجرام</strong>: 📩 ${currentOrderData.telegramUsername}<br>
+                        – <strong>عدد الشدات</strong>: 💉 <strong>${currentOrderData.package} UC</strong><br>
+                        – <strong>رقم العملية</strong> 🔑 ${orderId}<br>
+                        <strong>لو الخدمة عجبتك:</strong><br>
+                        ✅ ادينا تقييم يليق بعالم الرعب 🌌<br>
+                        ☑️ ابعت الجروب لصحابك الضحايا الجداد ☠️<br>
+                        📢 تابعنا علشان عروض الجحيم الجاية 🔥<br>
+                        <strong>شكراً لاختيارك ☢️ ᏚᏟᏢ ᏚᎢᎾᎡᎬ ☢️</strong><br>
+                        إحنا في ضهرك دايمًا بأفضل سعر وأسرع رعب ممكن تشوفه!<br><br>
+                        <strong>📩 تيليجرام الدعم الفني:</strong> <a href="https://t.me/SCPxOmar7" style="color: var(--neon-green);">@SCPxOmar7</a><br>
+                        <strong>متجر الظلام:</strong> <a href="https://t.me/scpstoreuc" style="color: var(--neon-green);">@scpstoreuc</a><br>
+                        <button onclick="resetFormAndRefresh()" style="padding: 12px 25px; background: var(--blood-red); color: white; border: none; border-radius: 8px; cursor: pointer; margin-top: 15px;">إغلاق</button>
+                    </div>
+                `;
+                statusMessage.style.display = 'block';
+                paymentSection.style.display = 'none';
+                await sendTelegramMessage(ADMIN_CHAT_ID, `✔ تم قبول الطلب ${orderId} بنجاح`);
+                if (currentOrderData.telegramUsername && currentOrderData.telegramUsername !== 'غير محدد') {
+                    const username = currentOrderData.telegramUsername.startsWith('@') ? currentOrderData.telegramUsername : `@${currentOrderData.telegramUsername}`;
+                    await sendTelegramMessage(username, `
+🎉 *تم الشحن بنجاح!* 🎉  
+🔢 *رقم الطلب:* \`${orderId}\`  
+👤 *الاسم:* ${currentOrderData.playerName}  
+🆔 *الآيدي:* ${currentOrderData.playerId}  
+💎 *الباقة:* ${currentOrderData.package} UC  
+شكرًا لاختيارك ☢️ ᏚᏟᏢ ᏚᎢᎾᎡᎬ ☢️  
+لو عندك أي استفسار، تواصل مع الدعم: @SCPxOmar7
+                    `);
+                }
+            } else if (status === 'rejected') {
+                statusMessage.className = 'status-message status-rejected';
+                statusMessage.innerHTML = `
+                    <div style="text-align: center;">
+                        <i class="fas fa-skull-crossbones" style="font-size: 20px; margin-bottom: 10px;"></i><br>
+                        <strong>تم رفض الطلب!</strong><br>
+                        تواصل مع الدعم <a href="https://t.me/SCPxOmar7" style="color: var(--neon-green);">@SCPxOmar7</a><br><br>
+                        <button onclick="resetFormAndRefresh()" style="padding: 12px 25px; background: var(--blood-red); color: white; border: none; border-radius: 8px; cursor: pointer; margin-top: 15px;">إغلاق</button>
+                    </div>
+                `;
+                statusMessage.style.display = 'block';
+                paymentSection.style.display = 'none';
+                await sendTelegramMessage(ADMIN_CHAT_ID, `✖️ تم رفض الطلب ${orderId}`);
+                if (currentOrderData.telegramUsername && currentOrderData.telegramUsername !== 'غير محدد') {
+                    const username = currentOrderData.telegramUsername.startsWith('@') ? currentOrderData.telegramUsername : `@${currentOrderData.telegramUsername}`;
+                    await sendTelegramMessage(username, `
+❌ *تم رفض طلبك!* ❌  
+🔢 *رقم الطلب:* \`${orderId}\`  
+👤 *الاسم:* ${currentOrderData.playerName}  
+🆔 *الآيدي:* ${currentOrderData.playerId}  
+💎 *الباقة:* ${currentOrderData.package} UC  
+تواصل مع الدعم لمعرفة السبب: @SCPxOmar7
+                    `);
+                }
+            }
+            console.log(`Status updated: ${status} for order ${orderId}`);
+        }
+
+        window.addEventListener('load', async function() {
+            createBloodDrips();
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getUpdates?limit=1`);
+                const data = await response.json();
+                if (data.ok && data.result.length > 0) {
+                    const lastUpdate = data.result[0];
+                    if (lastUpdate.message && lastUpdate.message.text === '/toggle_store') {
+                        await toggleStoreStatus();
+                    }
+                }
+            } catch (error) {
+                console.error('Error fetching last update:', error);
+            }
+            updateStoreStatus();
+            const isBotValid = await verifyBotToken();
+            if (!isBotValid) {
+                const statusMessage = document.getElementById('statusMessage');
+                if (statusMessage) {
+                    statusMessage.className = 'status-message status-error';
+                    statusMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> مشكلة في إعدادات الموقع (توكن غير صالح)، تواصل مع @SCPxOmar7';
+                    statusMessage.style.display = 'block';
+                }
+            } else {
+                await getLatestUpdateId();
+                startPollingUpdates();
+            }
+        });
+
+        document.getElementById('orderForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const form = this;
+            const statusMessage = document.getElementById('statusMessage');
+            const orderNumberElement = document.getElementById('orderNumber');
+            const submitBtn = form.querySelector('.submit-btn');
+            if (submitBtn.disabled) return;
+
+            if (!isStoreOpen) {
+                statusMessage.style.display = 'block';
+                statusMessage.className = 'status-message status-error';
+                statusMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> لا يوجد شحن الآن، حاول في وقت آخر!';
+                submitBtn.disabled = false;
+                return;
+            }
+
+            isCheckingUpdates = false;
+            statusMessage.style.display = 'block';
+            statusMessage.className = 'status-message status-pending';
+            statusMessage.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري معالجة طلبك...';
+            submitBtn.disabled = true;
+
+            const formData = new FormData(form);
+            const playerName = formData.get('playerName');
+            const playerId = formData.get('playerId');
+            const telegramUsername = formData.get('telegramUsername') || 'غير محدد';
+
+            if (!selectedPackage || !selectedAmount) {
+                statusMessage.className = 'status-message status-error';
+                statusMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> من فضلك اختر باقة من قسم الأسعار أعلاه!';
+                submitBtn.disabled = false;
+                return;
+            }
+
+            try {
+                const isBotValid = await verifyBotToken();
+                if (!isBotValid) throw new Error('Invalid bot token');
+
+                if (!ADMIN_CHAT_ID || ADMIN_CHAT_ID === "YOUR_ADMIN_CHAT_ID") {
+                    throw new Error('Invalid ADMIN_CHAT_ID');
+                }
+
+                currentOrderId = 'SCP-' + Date.now();
+                currentOrderData = { playerName, playerId, package: selectedPackage, telegramUsername };
+                orderNumberElement.textContent = `🔢 رقم الطلب: ${currentOrderId}`;
+                orderNumberElement.style.display = 'block';
+                console.log('Order created:', { orderId: currentOrderId, ...currentOrderData });
+
+                const message = `
+🎮 *طلب شحن جديد من ☢️ ᏚᏟᏢ ᏚᎢᎾᎡᎬ ☢️*  
+🔢 *رقم الطلب:* \`${currentOrderId}\`  
+👤 *الاسم:* ${playerName}  
+🆔 *الآيدي:* ${playerId}  
+📩 *اليوزر نيم في تيليجرام:* ${telegramUsername}  
+💎 *الباقة:* ${selectedPackage} UC  
+💳 *المبلغ المطلوب:* ${selectedAmount} جنيه
+                `;
+                const replyMarkup = {
+                    inline_keyboard: [
+                        [
+                            { text: '✅ تقديم الطلب', callback_data: `proceed_${currentOrderId}` },
+                            { text: '❌ رفض الطلب', callback_data: `reject_initial_${currentOrderId}` }
+                        ]
+                    ]
+                };
+                await sendTelegramMessage(ADMIN_CHAT_ID, message, replyMarkup);
+
+                await getLatestUpdateId();
+                startPollingUpdates();
+
+                const startTime = Date.now();
+                const timeout = 600000;
+                const timeoutInterval = setInterval(() => {
+                    if (!isCheckingUpdates) {
+                        clearInterval(timeoutInterval);
+                        return;
+                    }
+                    if (Date.now() - startTime > timeout) {
+                        clearInterval(timeoutInterval);
+                        isCheckingUpdates = false;
+                        statusMessage.className = 'status-message status-timeout';
+                        statusMessage.innerHTML = '<i class="fas fa-clock"></i> انتهى وقت الانتظار، تواصل مع الدعم @SCPxOmar7';
+                        statusMessage.style.display = 'block';
+                        submitBtn.disabled = false;
+                        currentOrderId = null;
+                        currentOrderData = null;
+                        selectedPackage = null;
+                        selectedAmount = null;
+                        console.log('Timeout reached');
+                    }
+                }, 5000);
+
+            } catch (error) {
+                isCheckingUpdates = false;
+                statusMessage.className = 'status-message status-error';
+                if (error.message.includes('Invalid bot token')) {
+                    statusMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> مشكلة في إعدادات الموقع (توكن غير صالح)، تواصل مع @SCPxOmar7';
+                } else if (error.message.includes('Invalid ADMIN_CHAT_ID')) {
+                    statusMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> مشكلة في إعدادات الموقع (ADMIN_CHAT_ID غير صحيح)، تواصل مع @SCPxOmar7';
+                } else if (error.message.includes('Failed to fetch')) {
+                    statusMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> مشكلة في الاتصال بالإنترنت، تحقق من اتصالك وجرب مرة أخرى!';
+                } else {
+                    statusMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> حدث خطأ غير متوقع، جرب مرة أخرى أو تواصل مع @SCPxOmar7';
+                }
+                statusMessage.style.display = 'block';
+                orderNumberElement.style.display = 'none';
+                submitBtn.disabled = false;
+                currentOrderId = null;
+                currentOrderData = null;
+                selectedPackage = null;
+                selectedAmount = null;
+                console.error('Submission error:', error);
+                if (error.message.includes('Failed to fetch') && retryCount < maxRetries) {
+                    retryCount++;
+                    setTimeout(() => form.dispatchEvent(new Event('submit')), 5000);
+                }
+            }
+        });
+
+        document.getElementById('paymentForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const form = this;
+            const statusMessage = document.getElementById('statusMessage');
+            const orderNumberElement = document.getElementById('orderNumber');
+            const submitBtn = form.querySelector('.submit-btn');
+            if (submitBtn.disabled) return;
+
+            if (!isWaitingForPayment) {
+                statusMessage.style.display = 'block';
+                statusMessage.className = 'status-message status-error';
+                statusMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> برجاء الانتظار حتى يتم تقديم الطلب!';
+                submitBtn.disabled = false;
+                return;
+            }
+
+            isCheckingUpdates = false;
+            statusMessage.style.display = 'block';
+            statusMessage.className = 'status-message status-pending';
+            statusMessage.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري معالجة التحويل...';
+            submitBtn.disabled = true;
+
+            const formData = new FormData(form);
+            const phoneNumber = formData.get('phoneNumber');
+            const paymentProof = document.getElementById('paymentProof').files[0];
+
+            if (!/^\d{11}$/.test(phoneNumber)) {
+                statusMessage.className = 'status-message status-error';
+                statusMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> رقم الهاتف يجب أن يكون 11 رقمًا!';
+                submitBtn.disabled = false;
+                return;
+            }
+
+            if (!paymentProof) {
+                statusMessage.className = 'status-message status-error';
+                statusMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> من فضلك اختر صورة إثبات التحويل!';
+                submitBtn.disabled = false;
+                return;
+            }
+
+            if (paymentProof.size > 5 * 1024 * 1024) {
+                statusMessage.className = 'status-message status-error';
+                statusMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> حجم الملف كبير جدًا، اختر ملف أقل من 5 ميجا!';
+                submitBtn.disabled = false;
+                return;
+            }
+
+            const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
+            if (!validTypes.includes(paymentProof.type)) {
+                statusMessage.className = 'status-message status-error';
+                statusMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> نوع الملف غير مدعوم، اختر صورة JPG أو PNG أو GIF!';
+                submitBtn.disabled = false;
+                return;
+            }
+
+            if (paymentProof.size === 0) {
+                statusMessage.className = 'status-message status-error';
+                statusMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> الملف فارغ أو غير صالح، اختر صورة جديدة!';
+                submitBtn.disabled = false;
+                return;
+            }
+
+            try {
+                const message = `
+🎮 *تحديث طلب شحن من ☢️ ᏚᏟᏢ ᏚᎢᎾᎡᎬ ☢️*  
+🔢 *رقم الطلب:* \`${currentOrderId}\`  
+👤 *الاسم:* ${currentOrderData.playerName}  
+🆔 *الآيدي:* ${currentOrderData.playerId}  
+📩 *اليوزر نيم في تيليجرام:* ${currentOrderData.telegramUsername}  
+💎 *الباقة:* ${currentOrderData.package} UC  
+💳 *المبلغ المطلوب:* ${selectedAmount} جنيه  
+📱 *رقم الهاتف المحول منه:* ${phoneNumber}  
+📸 *تم رفع صورة التحويل*  
+🔗 *رابط الشحن:* [اضغط هنا للشحن]
+                `;
+                const replyMarkup = {
+                    inline_keyboard: [
+                        [
+                            { text: '✅ إرسال الشدات', callback_data: `accept_${currentOrderId}` },
+                            { text: '❌ رفض الطلب', callback_data: `reject_${currentOrderId}` }
+                        ],
+                        [
+                            { text: '🔗 شحن الآن', url: 'https://www.midasbuy.com/midasbuy/eg/buy/pubgm' }
+                        ]
+                    ]
+                };
+                await sendTelegramMessage(ADMIN_CHAT_ID, message, replyMarkup);
+
+                if (paymentProof) {
+                    const photoFormData = new FormData();
+                    photoFormData.append('chat_id', ADMIN_CHAT_ID);
+                    photoFormData.append('photo', paymentProof);
+                    photoFormData.append('caption', `📸 إثبات تحويل من: ${phoneNumber}\n🔢 رقم الطلب: ${currentOrderId}`);
+                    const photoResponse = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+                        method: 'POST',
+                        body: photoFormData
+                    });
+                    const photoResult = await photoResponse.json();
+                    if (!photoResult.ok) throw new Error(photoResult.description || 'Failed to send photo');
+                    console.log('Payment proof sent');
+                }
+
+                await getLatestUpdateId();
+                startPollingUpdates();
+
+                const startTime = Date.now();
+                const timeout = 600000;
+                const timeoutInterval = setInterval(() => {
+                    if (!isCheckingUpdates) {
+                        clearInterval(timeoutInterval);
+                        return;
+                    }
+                    if (Date.now() - startTime > timeout) {
+                        clearInterval(timeoutInterval);
+                        isCheckingUpdates = false;
+                        statusMessage.className = 'status-message status-timeout';
+                        statusMessage.innerHTML = '<i class="fas fa-clock"></i> انتهى وقت الانتظار، تواصل مع الدعم @SCPxOmar7';
+                        statusMessage.style.display = 'block';
+                        submitBtn.disabled = false;
+                        console.log('Timeout reached');
+                    }
+                }, 5000);
+
+            } catch (error) {
+                isCheckingUpdates = false;
+                statusMessage.className = 'status-message status-error';
+                if (error.message.includes('Failed to send photo')) {
+                    statusMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> فشل رفع صورة التحويل، تحقق من الاتصال أو الملف! جرب مرة أخرى أو تواصل مع @SCPxOmar7';
+                } else if (error.message.includes('Failed to fetch')) {
+                    statusMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> مشكلة في الاتصال بالإنترنت، تحقق من اتصالك وجرب مرة أخرى!';
+                } else {
+                    statusMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> حدث خطأ غير متوقع، جرب مرة أخرى أو تواصل مع @SCPxOmar7';
+                }
+                statusMessage.style.display = 'block';
+                submitBtn.disabled = false;
+                console.error('Payment submission error:', error);
+                if (error.message.includes('Failed to fetch') && retryCount < maxRetries) {
+                    retryCount++;
+                    setTimeout(() => form.dispatchEvent(new Event('submit')), 5000);
+                }
+            }
+        });
+
+        document.querySelectorAll('.file-upload').forEach(fileUpload => {
+            const inputElement = fileUpload.querySelector('.file-upload-input');
+            const buttonElement = fileUpload.querySelector('.file-upload-btn');
+            inputElement.addEventListener('change', () => {
+                buttonElement.textContent = inputElement.files.length > 0 ? inputElement.files[0].name : 'اختر ملف';
+            });
+        });
+
+        function checkBackgroundImage() {
+            const img = new Image();
+            img.src = 'https://i.ibb.co/RKPdjV7/file-0000000048f061f695';
+            img.onerror = function() {
+                document.body.style.backgroundImage = 'none';
+                document.body.style.backgroundColor = '#050505';
+                console.log('Background image failed to load, using fallback color');
+            };
+        }
+
+        window.addEventListener('load', checkBackgroundImage);
+    </script>
+</body>
+</html>
